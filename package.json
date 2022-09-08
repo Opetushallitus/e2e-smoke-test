@@ -1,8 +1,11 @@
 {
   "name": "e2e-smoke-test",
   "version": "0.0.1",
-  "description": "Smoke tests against external interfaces",
-  "main": "index.js",
+  "description": "E2e and smoke tests",
+  "engines": {
+    "npm": ">=6.14.17",
+    "node": ">=14.18.0"
+  },
   "scripts": {
     "test": "playwright test",
     "test:untuva": "DOMAIN='https://untuvaopintopolku.fi' playwright test",
