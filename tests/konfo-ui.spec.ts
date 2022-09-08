@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import DOMAINS from '../src/domains';
+import { domainsToUse } from '../src/domains';
 
 test.describe('konfo-ui', () => {
-  for (let domain of DOMAINS) {
+  for (let domain of domainsToUse) {
     
     test(`${domain} has opintopolku title and redirects to konfo/fi`, async ({page}) => {
       await page.goto(domain)
