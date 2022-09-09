@@ -1,7 +1,7 @@
-name: Untuva Tests
+name: QA Tests
 on: 
   schedule:
-     - cron:  '*/10 8-18 * * 1-5'
+     - cron:  '*/30 8-18 * * 1-5'
 jobs:
   test:
     timeout-minutes: 60
@@ -16,7 +16,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npm run test:untuva
+      run: npm run test:qa
     - uses: actions/upload-artifact@v2
       if: always()
       with:
