@@ -1,4 +1,4 @@
-#e2-e-smoke-test
+#e2e-smoke-test
 
 Tässä repositorioissa sijaitsee erilaisia playwrightilla toteutettuja testejä, joita on tarkoitus ajaa vasten eri ympäristöjä.
 
