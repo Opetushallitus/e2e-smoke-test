@@ -2,11 +2,12 @@ import { test, expect } from '@playwright/test'
 import connectToEndpoint, 
   {getKonfoParams} from '../src/util'
 import { KonfoParams } from '../src/params'
-import DOMAINS from '../src/domains'
+import { domainsToUse } from '../src/domains'
 import ENDPOINTS from '../src/endpoints'
 
 test.describe('konfo external api', () => {
-  for (let domain of DOMAINS) {
+
+  for (let domain of domainsToUse) {
 
     let konfoParams : KonfoParams;
 
