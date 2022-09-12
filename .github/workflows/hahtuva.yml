@@ -1,7 +1,11 @@
 name: Hahtuva Tests
 on: 
   schedule:
-     - cron:  '20 8-18 * * 1-5'
+     - cron:  '*/10 8-18 * * 1-5'
+env:
+  SLACK_TOKEN: ${{ secrets.VALVONTA_HAHTUVA_SLACK_TOKEN }}
+  REPORT_DOMAIN: Hahtuva
+  ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 jobs:
   test:
     timeout-minutes: 60
@@ -16,6 +20,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      id: run-hahtuva-tests
+      continue-on-error: true
       run: npm run test:hahtuva
     - uses: actions/upload-artifact@v2
       if: always()
@@ -23,3 +29,6 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 4
+    - name: Send failure message
+      if: failure() && steps.run-hahtuva-tests.outcome == 'failure'
+      run: ./slack_notify.sh

@@ -2,8 +2,12 @@ name: Untuva Tests
 on: 
   schedule:
      - cron:  '*/10 8-18 * * 1-5'
+env:
+  SLACK_TOKEN: ${{ secrets.VALVONTA_UNTUVA_SLACK_TOKEN }}
+  REPORT_DOMAIN: Untuva
+  ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 jobs:
-  test:
+  test-untuva:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +19,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Playwright tests
+    - name: Tests
+      id: run-untuva-tests
       run: npm run test:untuva
     - uses: actions/upload-artifact@v2
       if: always()
@@ -23,3 +28,7 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 4
+    - name: Send failure message
+      if: failure() && steps.run-untuva-tests.outcome == 'failure'
+      run: ./slack_notify.sh
+
