@@ -10,8 +10,7 @@ const ENDPOINTS: Endpoint[] = [
   { url: 'konfo-backend/external/hakukohde/%s', params: ['hakukohdeOid'] },
   { url: 'konfo-backend/external/search/toteutukset-koulutuksittain', params: [] },
   { url: 'konfo-backend/external/search/filters', params: [] },
-  { url: 'konfo-backend/external/search/filters_as_array', params: [] },
-  { url: 'konfo-backend/external/404', params: [] }
+  { url: 'konfo-backend/external/search/filters_as_array', params: [] }
 ]
 
 export const KONFO_GET_KOULUTUS_WITH_TOTEUTUKSET: string = 'konfo-backend/external/search/toteutukset-koulutuksittain?size=1'

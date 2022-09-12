@@ -1,7 +1,7 @@
 name: Hahtuva Tests
 on: 
   schedule:
-     - cron:  '*/10 8-18 * * 1-5'
+     - cron:  '15 7,11 * * 1-5'
 env:
   SLACK_TOKEN: ${{ secrets.VALVONTA_HAHTUVA_SLACK_TOKEN }}
   REPORT_DOMAIN: Hahtuva
