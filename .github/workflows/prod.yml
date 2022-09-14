@@ -2,7 +2,7 @@ name: Tuotanto Tests
 on:
   workflow_dispatch:
   schedule:
-     - cron:  '* 7 * * 1-5'
+     - cron:  '30 7 * * 1-5'
 env:
   SLACK_TOKEN: ${{ secrets.VALVONTA_TUOTANTO_SLACK_TOKEN }}
   REPORT_DOMAIN: Tuotanto
