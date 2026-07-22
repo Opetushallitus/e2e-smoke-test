@@ -6,4 +6,4 @@ const DOMAINS: string[] = [
 
 export default DOMAINS
 
-export const domainsToUse = process.env.DOMAIN !== undefined ? [process.env.DOMAIN] : DOMAINS
+export const domainsToUse = process.env.DOMAIN === undefined ? DOMAINS : [process.env.DOMAIN]
