@@ -13,6 +13,6 @@ const ENDPOINTS: Endpoint[] = [
   { url: 'konfo-backend/external/search/filters_as_array', params: [] }
 ]
 
-export const KONFO_GET_KOULUTUS_WITH_TOTEUTUKSET = 'konfo-backend/external/search/toteutukset-koulutuksittain?size=1'
+export const KONFO_GET_KOULUTUS_WITH_TOTEUTUKSET = 'konfo-backend/external/search/toteutukset-koulutuksittain?size=1&hakukaynnissa=true'
 export const KONFO_GET_KOULUTUS_WITH_HAKU_AND_HAKUKOHDE = 'konfo-backend/external/koulutus/%s?haut=true&hakukohteet=true'
 export default ENDPOINTS
