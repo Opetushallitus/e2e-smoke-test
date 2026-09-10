@@ -30,18 +30,21 @@ const connectToEndpoint = async (domain: string, endpoint: Endpoint, params: Rec
 export const getKonfoParams = async (domain: string): Promise<KonfoParams> => {
   const { data } = await axios.get<KonfoSearchResponse>(`${domain}/${KONFO_GET_KOULUTUS_WITH_TOTEUTUKSET}`)
   const { hits } = data
-  const [{ oid: koulutusOid, toteutukset: [{ toteutusOid }] }] = hits
-  const { data: koulutusData } = await axios.get<KoulutusResponse>(`${domain}/${KONFO_GET_KOULUTUS_WITH_HAKU_AND_HAKUKOHDE.replace('%s', koulutusOid)}`)
-  const { haut, hakukohteet } = koulutusData
-  const [{ oid: hakuOid }] = haut
-  const [{ oid: hakukohdeOid }] = hakukohteet
-  return {
-    domain,
-    koulutusOid,
-    toteutusOid,
-    hakuOid,
-    hakukohdeOid
+  for (const { oid: koulutusOid, toteutukset: [{ toteutusOid }] } of hits) {
+    // eslint-disable-next-line no-await-in-loop -- must stop at the first match, so requests can't run in parallel
+    const { data: koulutusData } = await axios.get<KoulutusResponse>(`${domain}/${KONFO_GET_KOULUTUS_WITH_HAKU_AND_HAKUKOHDE.replace('%s', koulutusOid)}`)
+    const { haut, hakukohteet } = koulutusData
+    if (haut.length > 0 && hakukohteet.length > 0) {
+      return {
+        domain,
+        koulutusOid,
+        toteutusOid,
+        hakuOid: haut[0].oid,
+        hakukohdeOid: hakukohteet[0].oid
+      }
+    }
   }
+  throw new Error('Could not find a toteutus with at least one haku and hakukohde')
 }
 
 export default connectToEndpoint
