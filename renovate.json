@@ -9,7 +9,7 @@
       "matchManagers": ["github-actions"],
       "separateMajorMinor": false,
       "automerge": true,
-      "groupName": "github-actions"
+      "groupName": "Github Actions"
     },
     {
       "matchManagers": ["github-actions"],
